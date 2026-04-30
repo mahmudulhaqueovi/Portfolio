@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Mahmudul Haque Ovi · Structural Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="dark"] {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a25;
+    --surface: #16161f;
+    --border: #2a2a3a;
+    --text: #e8e8f0;
+    --text2: #8888aa;
+    --text3: #5555770;
+    --accent: #00e5ff;
+    --accent2: #7b2fff;
+    --accent3: #ff6b35;
+    --glow: rgba(0, 229, 255, 0.15);
+    --glow2: rgba(123, 47, 255, 0.12);
+  }
+
+  [data-theme="light"] {
+    --bg: #f0f0f5;
+    --bg2: #e8e8f0;
+    --bg3: #dcdce8;
+    --surface: #ffffff;
+    --border: #d0d0e0;
+    --text: #0d0d1a;
+    --text2: #555570;
+    --text3: #888899;
+    --accent: #0066cc;
+    --accent2: #6600cc;
+    --accent3: #cc4400;
+    --glow: rgba(0, 102, 204, 0.12);
+    --glow2: rgba(102, 0, 204, 0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 0.4rem;
+    display: flex;
+    gap: 0.2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: all var(--transition);
+  }
+
+  .theme-toggle button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    border-radius: 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--text2);
+    transition: all var(--transition);
+  }
+
+  .theme-toggle button.active {
+    background: var(--accent);
+    color: #000;
+    font-weight: 500;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: all var(--transition);
+  }
+
+  nav.scrolled {
+    border-bottom-color: var(--border);
+    background: rgba(10,10,15,0.7);
+  }
+
+  [data-theme="light"] nav.scrolled {
+    background: rgba(240,240,245,0.8);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    mask-image: radial-gradient(ellipse 80% 80% at 80% 50%, black 20%, transparent 70%);
+  }
+
+  .hero-orb {
+    position: absolute;
+    right: -10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent2) 0%, transparent 60%);
+    opacity: 0.08;
+    filter: blur(40px);
+  }
+
+  .hero-orb2 {
+    position: absolute;
+    right: 20%;
+    top: 20%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
+    opacity: 0.06;
+    filter: blur(30px);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding-top: 5rem;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 span {
+    display: block;
+    color: var(--accent);
+    -webkit-text-stroke: 0;
+  }
+
+  [data-theme="dark"] h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--text2);
+  }
+
+  [data-theme="light"] h1 .outline {
+    color: var(--bg3);
+    -webkit-text-stroke: 1.5px var(--text2);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text2);
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--glow);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* HERO RIGHT — STATS CARD */
+  .hero-right {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+  }
+
+  .stats-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    width: 320px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .stats-card-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00ff88;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .stat-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-value .unit {
+    font-size: 1rem;
+    color: var(--accent);
+  }
+
+  .stat-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+  }
+
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    animation: fillBar 1.5s ease forwards;
+  }
+
+  @keyframes fillBar {
+    from { width: 0; }
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+  .software-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .pill {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+
+  .pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 3rem;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    align-self: center;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    line-height: 1.9;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    border-radius: 3px 0 0 3px;
+  }
+
+  .edu-degree {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+  }
+
+  .edu-school {
+    font-size: 0.82rem;
+    color: var(--text2);
+    margin-bottom: 0.2rem;
+  }
+
+  .edu-gpa {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  /* EXPERIENCE */
+  .experience-section { background: var(--bg2); }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent3), var(--accent));
+  }
+
+  .exp-role {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text2);
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .exp-period .dot { color: #00ff88; }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--glow);
+  }
+
+  .project-type {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .type-steel { background: rgba(0,229,255,0.1); color: var(--accent); border: 1px solid rgba(0,229,255,0.3); }
+  .type-rc { background: rgba(255,107,53,0.1); color: var(--accent3); border: 1px solid rgba(255,107,53,0.3); }
+  .type-glass { background: rgba(123,47,255,0.1); color: var(--accent2); border: 1px solid rgba(123,47,255,0.3); }
+  .type-dea { background: rgba(0,255,136,0.1); color: #00ff88; border: 1px solid rgba(0,255,136,0.3); }
+
+  [data-theme="light"] .type-steel { background: rgba(0,102,204,0.08); color: var(--accent); border: 1px solid rgba(0,102,204,0.25); }
+  [data-theme="light"] .type-rc { background: rgba(204,68,0,0.08); color: var(--accent3); border: 1px solid rgba(204,68,0,0.25); }
+  [data-theme="light"] .type-glass { background: rgba(102,0,204,0.08); color: var(--accent2); border: 1px solid rgba(102,0,204,0.25); }
+  [data-theme="light"] .type-dea { background: rgba(0,153,80,0.08); color: #009950; border: 1px solid rgba(0,153,80,0.25); }
+
+  .project-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+  }
+
+  .project-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text2);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+  }
+
+  /* PUBLICATIONS */
+  .publications-section { background: var(--bg2); }
+
+  .pub-list { max-width: 800px; }
+
+  .pub-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .pub-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--border);
+    line-height: 1;
+    min-width: 2.5rem;
+  }
+
+  .pub-title {
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+  }
+
+  .pub-journal {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+
+  .pub-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text2);
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1000px;
+  }
+
+  .contact-info { }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .contact-value a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .contact-tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    color: var(--text2);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text2);
+    letter-spacing: 0.05em;
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* HERO ANIMATION */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.7s ease 0.1s both; }
+  h1 { animation: fadeUp 0.7s ease 0.2s both; }
+  .hero-desc { animation: fadeUp 0.7s ease 0.35s both; }
+  .hero-ctas { animation: fadeUp 0.7s ease 0.5s both; }
+  .hero-right { animation: fadeUp 0.7s ease 0.4s both; }
+
+  /* PROJECTS FILTER */
+  .filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-tab {
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+
+  .filter-tab.active, .filter-tab:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  .project-card.hidden {
+    display: none;
+  }
+
+  /* CGPA RING */
+  .cgpa-ring {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+  }
+
+  .cgpa-ring svg {
+    position: absolute;
+    top: 0; left: 0;
+    transform: rotate(-90deg);
+  }
+
+  .cgpa-ring-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--accent);
+    text-align: center;
+    line-height: 1;
+  }
+
+  .cgpa-ring-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.48rem;
+    color: var(--text2);
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 0 1.5rem; gap: 3rem; }
+    .hero-right { justify-content: flex-start; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .theme-toggle { top: 1rem; right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Theme Toggle -->
+<div class="theme-toggle">
+  <button class="active" id="btn-dark" onclick="setTheme('dark')">◑ Dark</button>
+  <button id="btn-light" onclick="setTheme('light')">○ Light</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">MMH·OVI</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-orb2"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Structural · Civil Engineer</div>
+    <h1>
+      <span class="outline">Mahmudul</span>
+      <span>Haque</span>
+      <span>Ovi.</span>
+    </h1>
+    <p class="hero-desc">
+      B.Sc. Civil Engineer from AUST. Specializing in structural design, seismic analysis, and industrial-scale building systems across Bangladesh.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stats-card">
+      <div class="stats-card-header">
+        <div class="status-dot"></div>
+        Available for projects
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-label">Projects Completed</div>
+        <div class="stat-value">16 <span class="unit">+</span></div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:80%"></div></div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-label">Research Publications</div>
+        <div class="stat-value">4 <span class="unit">Papers</span></div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:60%;animation-delay:0.2s"></div></div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-label">CGPA</div>
+        <div class="stat-value">3.55 <span class="unit">/ 4.0</span></div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:89%;animation-delay:0.4s"></div></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="stat-label" style="margin-bottom:0.6rem">Software Stack</div>
+      <div class="software-pills">
+        <span class="pill">ETABS</span>
+        <span class="pill">SAP2000</span>
+        <span class="pill">SAFE</span>
+        <span class="pill">RAM Connection</span>
+        <span class="pill">AutoCAD</span>
+        <span class="pill">MS Office</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2>About Me</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I am a <strong>Civil &amp; Structural Engineer</strong> with a B.Sc. from <strong>Ahsanullah University of Science and Technology (AUST)</strong>, Dhaka. My passion lies in designing safe, efficient, and innovative structural systems.
+      </p>
+      <p>
+        Currently working as a <strong>Jr. Structural Engineer</strong> at Artesian Engineering and Consultant Ltd., I have hands-on experience with steel structures, reinforced concrete buildings, glass &amp; aluminium frame systems, and Detailed Engineering Assessments (DEA).
+      </p>
+      <p>
+        My research focuses on <strong>seismic performance of high-rise buildings</strong>, shear wall optimization, and sustainable concrete materials — with publications in international journals including Wiley's <em>Advances in Civil Engineering</em>.
+      </p>
+      <p>
+        I am proficient in both <strong>Bangla</strong> and <strong>English</strong>, and comfortable working on Windows and macOS environments.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="edu-card">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.6rem">
+          <div>
+            <div class="edu-degree">B.Sc. in Civil Engineering</div>
+            <div class="edu-school">Ahsanullah University of Science and Technology (AUST), Dhaka</div>
+            <div class="edu-gpa">CGPA: 3.550 / 4.00 · Graduated 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
+        <div class="edu-school">Rajbari Government College, Rajbari</div>
+        <div class="edu-gpa">GPA: 4.75 / 5.00 · Science · 2019</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Secondary School Certificate (SSC)</div>
+        <div class="edu-school">Rajbari Government High School</div>
+        <div class="edu-gpa">GPA: 5.00 / 5.00 · Science · 2017</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Junior School Certificate (JSC)</div>
+        <div class="edu-school">Rajbari Government High School</div>
+        <div class="edu-gpa">GPA: 5.00 / 5.00 · 2015</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="experience-section">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2>Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:1.5rem;max-width:700px;margin:0 auto;">
+    <div class="exp-card reveal">
+      <div class="exp-role">Jr. Structural Engineer</div>
+      <div class="exp-company">Artesian Engineering and Consultant Ltd.</div>
+      <div class="exp-period"><span class="dot">●</span> March 2025 – Present</div>
+      <div class="divider"></div>
+      <p style="color:var(--text2);font-size:0.9rem;line-height:1.8;">
+        Structural design and analysis of industrial, commercial, and residential buildings. Hands-on work with steel structures, RC frame systems, and DEA assessments using ETABS, SAFE, and SAP2000.
+      </p>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-role">Surveyor (Freelancer)</div>
+      <div class="exp-company">Nippon Koei Bangladesh Ltd.</div>
+      <div class="exp-period"><span style="color:var(--text2)">●</span> February 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2>Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="filter-tabs reveal">
+    <button class="filter-tab active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-tab" onclick="filterProjects('steel', this)">Steel Structure</button>
+    <button class="filter-tab" onclick="filterProjects('rc', this)">RC Structure</button>
+    <button class="filter-tab" onclick="filterProjects('glass', this)">Glass & Frame</button>
+    <button class="filter-tab" onclick="filterProjects('dea', this)">DEA</button>
+  </div>
+
+  <div class="projects-grid" id="projects-grid">
+
+    <!-- STEEL PROJECTS -->
+    <div class="project-card reveal" data-type="steel">
+      <span class="project-type type-steel">Steel Structure</span>
+      <div class="project-name">3-Storied Industrial Building — Tianford Bangladesh Textile Co., Ltd.</div>
+      <div class="project-meta">📍 Uttara EPZ, Nilphamari<br>Area: 394,295 ft² · Height: 66.16 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="steel">
+      <span class="project-type type-steel">Steel Structure</span>
+      <div class="project-name">2-Storied Industrial Building — Unifa Accessories BD Co. Ltd.</div>
+      <div class="project-meta">📍 Mirsarai EPZ, Chittagong</div>
+    </div>
+
+    <div class="project-card reveal" data-type="steel">
+      <span class="project-type type-steel">Steel Structure</span>
+      <div class="project-name">2-Storied Industrial Building — United Spinning & Dying Ltd. (Large Unit)</div>
+      <div class="project-meta">📍 Uttara EPZ, Nilphamari<br>Area: 219,410 ft² · Height: 52.91 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="steel">
+      <span class="project-type type-steel">Steel Structure</span>
+      <div class="project-name">2-Storied Industrial Building — United Spinning & Dying Ltd. (Small Unit)</div>
+      <div class="project-meta">📍 Uttara EPZ, Nilphamari<br>Area: 71,998 ft² · Height: 57.02 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="steel">
+      <span class="project-type type-steel">Steel Structure</span>
+      <div class="project-name">Factory Shed Building — G Six Packaging and Accessories Ltd.</div>
+      <div class="project-meta">📍 Ashulia, Savar, Dhaka<br>Area: 42,343 ft² · Height: 39.59 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="steel">
+      <span class="project-type type-steel">Steel Structure</span>
+      <div class="project-name">Vaporizer Shed — Sanxin Accessories MFC BD Ltd.</div>
+      <div class="project-meta">📍 Mirsarai EPZ, Chittagong<br>Area: 270 ft² · Height: 11.18 ft</div>
+    </div>
+
+    <!-- RC PROJECTS -->
+    <div class="project-card reveal" data-type="rc">
+      <span class="project-type type-rc">RC Structure</span>
+      <div class="project-name">2-Storied Cafeteria — Unifa Accessories BD Co. Ltd.</div>
+      <div class="project-meta">📍 Mirsarai EPZ, Chittagong</div>
+    </div>
+
+    <div class="project-card reveal" data-type="rc">
+      <span class="project-type type-rc">RC Structure</span>
+      <div class="project-name">3-Storied Cafeteria — United Spinning & Dying Ltd. (Large Unit)</div>
+      <div class="project-meta">📍 Uttara EPZ, Nilphamari<br>Area: 17,975 ft² · Height: 51.18 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="rc">
+      <span class="project-type type-rc">RC Structure</span>
+      <div class="project-name">10-Storied Residential Building</div>
+      <div class="project-meta">📍 Vashantek, Dhaka</div>
+    </div>
+
+    <div class="project-card reveal" data-type="rc">
+      <span class="project-type type-rc">RC Structure</span>
+      <div class="project-name">5-Storied Office & Dormitory — Bangladesh Scouts</div>
+      <div class="project-meta">📍 Gazipur, Bangladesh</div>
+    </div>
+
+    <div class="project-card reveal" data-type="rc">
+      <span class="project-type type-rc">RC Structure</span>
+      <div class="project-name">2-Storied Cafeteria — Bangladesh Police Kallyan Trust</div>
+      <div class="project-meta">📍 POHS-1, Purbachal, Dhaka</div>
+    </div>
+
+    <!-- GLASS PROJECTS -->
+    <div class="project-card reveal" data-type="glass">
+      <span class="project-type type-glass">Glass & Frame</span>
+      <div class="project-name">Glass & Aluminium Frame — ABC Centercourt, ABC Real Estates Ltd.</div>
+      <div class="project-meta">📍 Khilji Road, Shyamoli, Dhaka<br>14-Storied Building</div>
+    </div>
+
+    <div class="project-card reveal" data-type="glass">
+      <span class="project-type type-glass">Glass & Frame</span>
+      <div class="project-name">Aluminium Glass Frame — Building Technology & Ideas Ltd.</div>
+      <div class="project-meta">📍 Celebration Point, Rd No 113/A, Dhaka</div>
+    </div>
+
+    <!-- DEA PROJECTS -->
+    <div class="project-card reveal" data-type="dea">
+      <span class="project-type type-dea">DEA</span>
+      <div class="project-name">Fabric Bond Building — Creative Wash Ltd. (Ha-Meem Group)</div>
+      <div class="project-meta">📍 Nishatangar, Tongi, Gazipur<br>Area: 34,472 ft² · Height: 53.46 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="dea">
+      <span class="project-type type-dea">DEA</span>
+      <div class="project-name">4-Storied Milk Powder Plant — Akij Food & Beverage Ltd.</div>
+      <div class="project-meta">📍 Krisnopura, Dhamrai, Dhaka<br>Area: 6,148 ft² · Height: 63.74 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="dea">
+      <span class="project-type type-dea">DEA</span>
+      <div class="project-name">4-Storied Milk Warehouse — Akij Food & Beverage Ltd.</div>
+      <div class="project-meta">📍 Krisnopura, Dhamrai, Dhaka<br>Area: 49,430 ft² · Height: 47.95 ft</div>
+    </div>
+
+    <div class="project-card reveal" data-type="dea">
+      <span class="project-type type-dea">DEA</span>
+      <div class="project-name">Single Storey Shed — Kalyer Replica Ltd.</div>
+      <div class="project-meta">📍 Nayapara, Mirzapur, Gazipur<br>Area: 40,211 ft²</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="publications-section">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2>Research & Publications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="pub-list">
+    <div class="pub-item reveal">
+      <div class="pub-num">01</div>
+      <div>
+        <div class="pub-title">Enhancing Concrete Performance: A Comprehensive Review of Magnetic-Field Treated Water Mixtures</div>
+        <div class="pub-journal">Advances in Civil Engineering · Wiley</div>
+        <div class="pub-year">Publication Ongoing</div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">02</div>
+      <div>
+        <div class="pub-title">Impact of Sloping Ground on the Seismic and Wind Performance of High-Rise Buildings with Outrigger Bracing Systems</div>
+        <div class="pub-journal">International Journal of Engineering Research and Technology · ESRSA Publications</div>
+        <div class="pub-year">August 2025</div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">03</div>
+      <div>
+        <div class="pub-title">Effect of Partially Replaced Plastic, Rubber and Glass Powder On the Compressive Strength of Concrete</div>
+        <div class="pub-journal">Journal of Building Construction · HBRP Publication Pvt. Ltd.</div>
+        <div class="pub-year">July 2025</div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">04</div>
+      <div>
+        <div class="pub-title">Enhancing Seismic Performance of High-Rise Buildings: A Review of Shear Wall Implementation</div>
+        <div class="pub-journal">Journal of Engineering Analysis and Design · HBRP Publication Pvt. Ltd.</div>
+        <div class="pub-year">March 2025</div>
+      </div>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-num">05</div>
+      <div>
+        <div class="pub-title">Thesis: Analysis of Multi-story Stiffness Irregular Reinforced Concrete Building with Shear Wall at Different Locations</div>
+        <div class="pub-journal">AUST · Undergraduate Research</div>
+        <div class="pub-year">2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2>Contact</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-tagline">Let's Build Something Extraordinary.</div>
+      <p class="contact-sub">Open to structural engineering opportunities, collaborations, and research partnerships. Based in Dhaka, Bangladesh.</p>
+      <a href="mailto:mahmudulhaqueovi2580@gmail.com" class="btn btn-primary">Send an Email →</a>
+    </div>
+
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+88 01782 617756</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:mahmudulhaqueovi2580@gmail.com">mahmudulhaqueovi2580@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value"><a href="https://www.linkedin.com/in/md-mahmudul-haque-ovi-8a0b11338/" target="_blank">md-mahmudul-haque-ovi</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Dhaka, Bangladesh</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MMH·OVI</div>
+  <div class="footer-copy">© 2026 Md. Mahmudul Haque Ovi · Structural Engineer</div>
+</footer>
+
+<script>
+  // Theme toggle
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('btn-dark').classList.toggle('active', theme === 'dark');
+    document.getElementById('btn-light').classList.toggle('active', theme === 'light');
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Project filter
+  function filterProjects(type, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.project-card').forEach(card => {
+      if (type === 'all' || card.dataset.type === type) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+</script>
+</body>
+</html>
